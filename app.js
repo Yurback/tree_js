@@ -74,6 +74,6 @@ filesystem.add('games/cod.exe');
 filesystem.add('games/cod2.exe');
 filesystem.remove('games/cod.exe');
 //filesystem.remove('games/cod3.exe');
-filesystem.remove('games222/cod.exe');
+//filesystem.remove('games222/cod.exe');
 
 console.log(filesystem);
