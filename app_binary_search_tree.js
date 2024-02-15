@@ -47,7 +47,15 @@ class Node {
         }
 
         if (idetifiedNode.left && idetifiedNode.right) {
-
+            const nextBiggerNode = idetifiedNode.right.findNext();
+            if (nextBiggerNode !== idetifiedNode.right) {
+                this.remove(nextBiggerNode.value);
+                idetifiedNode.value = nextBiggerNode.value;
+            } else {
+                idetifiedNode.value = idetifiedNode.right.value;
+                idetifiedNode.right = idetifiedNode.right.right;
+                idetifiedNode.right.parent = idetifiedNode;
+            }
         } else {
             const childNode = idetifiedNode.left || idetifiedNode.right;
             idetifiedNode.left = childNode.left;
@@ -56,6 +64,13 @@ class Node {
             return;
         }
 
+    }
+
+    findNext() {
+        if (!this.left) {
+            return this;
+        }
+        return this.left.findNext();
     }
 
     removeChild(node) {
@@ -108,9 +123,10 @@ tree.add(20);
 tree.add(25);
 tree.add(23);
 tree.add(28);
+// tree.add(26);
 tree.add(39);
-tree.remove(20);
-tree.remove(39);
+// tree.remove(20);
+// tree.remove(39);
 tree.remove(25);
 
 console.log(tree);
