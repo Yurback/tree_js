@@ -100,12 +100,16 @@ find(value) {
 }
 
 const filesystem = new Tree('/');
+// filesystem.add('documents');
 filesystem.add('documents');
 filesystem.add('documents/personal/tax.docx');
+filesystem.add('documents');
 filesystem.add('personal');
 filesystem.add('games/cod.exe');
 filesystem.add('games/cod2.exe');
-filesystem.remove('games/cod.exe');
+// filesystem.remove('games/cod.exe');
+// filesystem.remove('documents');
+// filesystem.remove('documents');
 //filesystem.remove('games/cod3.exe');
 //filesystem.remove('games222/cod.exe');
 

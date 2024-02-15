@@ -1,6 +1,9 @@
 class Node {
     constructor(value) {
         this.value = value;
+        this.left = null;
+        this.right = null;
+        this.parent = null;
     }
 
     add(value) {
@@ -14,6 +17,7 @@ class Node {
                 return;
             }
             const newNode = new Node(value);
+            newNode.parent = this;
             this.right = newNode;
             return;
         }
@@ -23,7 +27,32 @@ class Node {
                 return;
             }
             const newNode = new Node(value);
+            newNode.parent = this;
             this.left = newNode;
+            return;
+        }
+    }
+
+    remove(value) {
+        const idetnifiedNode = this.find(value);
+
+        if (!idetnifiedNode) {
+            throw new Error('Could not find node with that value');
+        }
+
+        if (!idetnifiedNode.left && !idetnifiedNode.right) {
+            const identifiedParent = idetnifiedNode.parent;
+            identifiedParent.removeChild(idetnifiedNode)
+        }
+    }
+
+    removeChild(node) {
+        if (this.left && this.left === node) {
+            this.left = null;
+            return;
+        }
+        if (this.right && this.right === node) {
+            this.right = null;
             return;
         }
     }
@@ -66,6 +95,7 @@ tree.add(6);
 tree.add(20);
 tree.add(25);
 tree.add(39);
+tree.remove(39);
 
 console.log(tree);
 console.log(tree.find(6));
