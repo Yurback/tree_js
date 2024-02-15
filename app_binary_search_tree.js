@@ -34,16 +34,28 @@ class Node {
     }
 
     remove(value) {
-        const idetnifiedNode = this.find(value);
+        const idetifiedNode = this.find(value);
 
-        if (!idetnifiedNode) {
+        if (!idetifiedNode) {
             throw new Error('Could not find node with that value');
         }
 
-        if (!idetnifiedNode.left && !idetnifiedNode.right) {
-            const identifiedParent = idetnifiedNode.parent;
-            identifiedParent.removeChild(idetnifiedNode)
+        if (!idetifiedNode.left && !idetifiedNode.right) {
+            const identifiedParent = idetifiedNode.parent;
+            idetifiedNode.removeChild(idetifiedNode)
+            return;
         }
+
+        if (idetifiedNode.left && idetifiedNode.right) {
+
+        } else {
+            const childNode = idetifiedNode.left || idetifiedNode.right;
+            idetifiedNode.left = childNode.left;
+            idetifiedNode.right = childNode.right;
+            idetifiedNode.value = childNode.value;
+            return;
+        }
+
     }
 
     removeChild(node) {
@@ -94,8 +106,12 @@ tree.add(2);
 tree.add(6);
 tree.add(20);
 tree.add(25);
+tree.add(23);
+tree.add(28);
 tree.add(39);
+tree.remove(20);
 tree.remove(39);
+tree.remove(25);
 
 console.log(tree);
 console.log(tree.find(6));
