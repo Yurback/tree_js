@@ -208,10 +208,55 @@ class AVLTree extends Tree {
         rightNode.left = node;
         rightNode.left.parent = rightNode;
     }
+
+    rotateRight(node) {
+        const leftNode = node.left;
+        node.left = null;
+
+        if (node.parent) {
+            if (node.parent.left === node) {
+                node.parent.left = leftNode;
+                node.parent.left.parent = node.parent;
+            } else {
+                node.parent.right = leftNode;
+                node.parent.right.parent = node.parent;
+            }
+        } else if (node === this.root) {
+            this.root = leftNode;
+            this.root.parent = null;
+        }
+
+        if (leftNode.right) {
+            node.left = leftNode.right;
+            node.left.parent = node;
+        }
+
+        leftNode.right = node;
+        leftNode.right.parent = leftNode;
+    }
 }
 
 const tree = new AVLTree();
+//=========================================================================
+// LeftRotation
+// tree.add(0);
+// tree.add(-5);
+//     //tree.add(100);    // check node.parent.left
+//     //tree.add(110);      // check node.parent.left
+// tree.add(5);
+//     //tree.add(105);      // check node.parent.left
+//     //tree.add(115);      // check node.parent.left
+// tree.add(-7);
+// tree.add(-3);
+// tree.add(3);
+// tree.add(-4);
+// tree.add(10);
+// tree.add(8);
+// tree.add(12);
+// tree.add(11);
+//-----------------------------------------------------------------------
 
+//RightRotation
 tree.add(0);
 tree.add(-5);
 //tree.add(100);    // check node.parent.left
@@ -224,8 +269,14 @@ tree.add(-3);
 tree.add(3);
 tree.add(-4);
 tree.add(10);
-tree.add(8);
-tree.add(12);
-tree.add(11);
+// tree.add(3);
+tree.add(4);
+tree.add(2);
+tree.add(1);
+// tree.add(8);
+// tree.add(12);
+// tree.add(11);
+
+
 
 console.log(tree);
