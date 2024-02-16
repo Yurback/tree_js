@@ -175,7 +175,7 @@ class AVLTree extends Tree {
                 this.rotateRightLeft(node);
             }
         } else if (node.balanceFactor > 1) {
-            if (node.right.balanceFactor < 0 ) {
+            if (node.left.balanceFactor < 0 ) {
                 this.rotateLeftRight(node);
             } else if (node.left.balanceFactor > 0) {
                 this.rotateRight(node);
@@ -188,8 +188,13 @@ class AVLTree extends Tree {
         node.right = null;
 
         if (node.parent) {
-            node.parent.right = rightNode;
-            node.parent.right.parent = node.parent;
+            if (node.parent.left === node) {
+                node.parent.left = rightNode;
+                node.parent.left.parent = node.parent;
+            } else {
+                node.parent.right = rightNode;
+                node.parent.right.parent = node.parent;
+            }
         } else if (node === this.root) {
             this.root = rightNode;
             this.root.parent = null;
@@ -207,8 +212,20 @@ class AVLTree extends Tree {
 
 const tree = new AVLTree();
 
-tree.add(1);
-tree.add(2);
+tree.add(0);
+tree.add(-5);
+//tree.add(100);    // check node.parent.left
+//tree.add(110);      // check node.parent.left
+tree.add(5);
+//tree.add(105);      // check node.parent.left
+//tree.add(115);      // check node.parent.left
+tree.add(-7);
+tree.add(-3);
 tree.add(3);
+tree.add(-4);
+tree.add(10);
+tree.add(8);
+tree.add(12);
+tree.add(11);
 
 console.log(tree);
