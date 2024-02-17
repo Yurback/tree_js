@@ -234,6 +234,50 @@ class AVLTree extends Tree {
         leftNode.right = node;
         leftNode.right.parent = leftNode;
     }
+
+    rotateLeftRight(node) {
+        const leftNode = node.left;
+        node.left = null;
+
+        const leftRightNode = leftNode.right;
+        leftNode.right = null;
+
+        if (leftRightNode.left) {
+            leftNode.right = leftRightNode.left;
+            leftRightNode.left.parent = leftNode;
+            leftRightNode.left = null;
+        }
+
+        node.left = leftRightNode;
+        node.left.parent = node;
+
+        leftRightNode.left = leftNode;
+        leftRightNode.left.parent = leftRightNode;
+
+        this.rotateRight(node);
+    }
+
+    rotateRightLeft(node) {
+        const rightNode = node.right;
+        node.right = null;
+
+        const rightLeftNode = rightNode.left;
+        rightNode.left = null;
+
+        if(rightLeftNode.right) {
+            rightNode.left = rightLeftNode.right;
+            rightLeftNode.right.parent = rightNode;
+            rightLeftNode.right = null;
+        }
+
+        node.right = rightLeftNode;
+        node.right.parent = node;
+
+        rightLeftNode.right = rightNode;
+        rightLeftNode.right.parent = rightLeftNode;
+
+        this.rotateLeft(node);
+    }
 }
 
 const tree = new AVLTree();
@@ -256,27 +300,49 @@ const tree = new AVLTree();
 // tree.add(11);
 //-----------------------------------------------------------------------
 
-//RightRotation
-tree.add(0);
-tree.add(-5);
-//tree.add(100);    // check node.parent.left
-//tree.add(110);      // check node.parent.left
-tree.add(5);
-//tree.add(105);      // check node.parent.left
-//tree.add(115);      // check node.parent.left
-tree.add(-7);
-tree.add(-3);
-tree.add(3);
-tree.add(-4);
-tree.add(10);
+// //RightRotation
+// tree.add(0);
+// tree.add(-5);
+// //tree.add(100);    // check node.parent.left
+// //tree.add(110);      // check node.parent.left
+// tree.add(5);
+// //tree.add(105);      // check node.parent.left
+// //tree.add(115);      // check node.parent.left
+// tree.add(-7);
+// tree.add(-3);
 // tree.add(3);
-tree.add(4);
-tree.add(2);
-tree.add(1);
+// tree.add(-4);
+// tree.add(10);
+// // tree.add(3);
+// tree.add(4);
+// tree.add(2);
+// tree.add(1);
+// // tree.add(8);
+// // tree.add(12);
+// // tree.add(11);
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// LeftRightRotation
+
+// tree.add(10);
+// tree.add(15);
+// tree.add(5);
+// tree.add(2);
 // tree.add(8);
-// tree.add(12);
-// tree.add(11);
+// //tree.add(7);
+// tree.add(9);
 
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+// RightLeftRotation
+
+tree.add(10);
+tree.add(5);
+tree.add(15);
+tree.add(13);
+tree.add(20);
+tree.add(12);
+// tree.add(14);
 
 console.log(tree);
